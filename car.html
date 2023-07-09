@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link rel='stylesheet' type='text/css' media='screen' href='car.css'>
+    
+    
+</head>
+<body>
+    <center>
+        <ul class="menu">
+            <li class="list"><a href="index.html">Home</a></li>
+            <li class="list"><a href="#">Cars</a></li>
+            <li class="list"><a href="#About">About Me</a></li>
+        </ul>
+    </center>
+    <Br>
+    <Br> 
+        <center>
+            <h1 style="font-size: 70px; padding-bottom: 50px; background: linear-gradient(
+                to bottom, rgb(36, 180, 137), rgb(255, 255, 255));
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            text-transform: uppercase;">Car Accesories</h1>
+        </center>
+    <div id="output"></div>   
+    
+</body>
+<script>
+    click = 0
+
+    let carDictionary = {
+        "Clifford": {Color: "Red", Price: "2000", Seater: "5 Seater", CarType: "Sadan", CarName: "Clifford"},
+        "Suzuki": {Color: "Blue", Price: "3000", Seater: "7 Seater", CarType: "Sadan", CarName: "Suzuki"},
+        "Nexon": {Color: "Light Green", Price: "5000", Seater: "5 Seater", CarType: "Sadan", CarName: "Nexon"}
+
+    };
+
+    function generateCars()
+    {
+        Object.keys(carDictionary).forEach(k =>{
+                price = '<h5>Price - ' + carDictionary[k].Price + '$</h5>';
+                CSeater = '<h5>Number Of Seats - ' + carDictionary[k].Seater + '</h5>';
+                CType = '<h5>Car Type - ' + carDictionary[k].CarType + '</h5>';
+                button = '<button onclick="viewCar(this.id);" data-price="'+ carDictionary[k].Price +'" id="' + carDictionary[k].CarName + '"" style="color: white; background-color: green; border-radius: 15px; width: 100px;">View Car</button></center></div>';
+                color = '<h5>Color - ' + carDictionary[k].Color + '</h5>';
+                
+                start = '<div class="col-lg-3" style="width: 300px; border: 1px solid grey; padding: 50px;margin: 20px;"><center>';
+                carName = '<h1 style="margin-top: auto;">' + carDictionary[k].CarName + '</h1>';
+                image = '<Br><img src="cars/' +  carDictionary[k].CarName + '.png" width="80%" height="50%">';
+                hr = '<hr style="padding-bottom: 10px; margin: 30px -50px 20px;">';
+                fullTemplate = start + carName + image + hr + color + price + CSeater + CType + button;
+
+                document.getElementById("output").innerHTML += fullTemplate;
+            });
+        
+    }
+
+    generateCars();
+
+    function viewCar(id)
+    {
+        localStorage.setItem("Car", id);
+        localStorage.setItem("Price", document.getElementById(id).getAttribute("data-price"));
+        click += 1;
+        window.location = "carproperties.html";
+    }
+</script>
+</html>

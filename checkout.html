@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>Checkout</title>
+</head>
+<body>
+    <center>
+        <ul class="menu">
+            <li class="list"><a href="#Home">Home</a></li>
+            <li class="list"><a href="car.html">Cars</a></li>
+            <li class="list"><a href="#About">About Me</a></li>
+        </ul>
+    </center>
+    <br>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <div id="item">
+    </div>
+
+    <script>
+        function getCar()
+        {
+            content = "";
+            image = "<img src='cars/"+ localStorage.getItem("Car") +".png'><h1>" + localStorage.getItem("Car")  +"</h1><h3>Addons:</h3>"
+                if (localStorage.getItem("accessories").includes("tyre")){
+                    content += "<h4>Spare Tyre</h4>"
+                    
+                }if (localStorage.getItem("accessories").includes("sensor")){
+                    content += "<h4>Sensor</h4>"
+                }
+                 if(localStorage.getItem("accessories").includes("tissue")){
+                    content += "<h4>Tissue Holder</h4>"
+                }  
+                if(localStorage.getItem("accessories").includes("camera")){
+                    content += "<h4>Parking Camera</h4>"
+                }      
+
+                price = "<br><br><br><h2>FINAL PRICE - $" + localStorage.getItem("final")  +"</h2><br><br><hr>"
+                buyB = "<button class='btn btn-success' onclick='buy()' style='border-radius: 15px; font-size: 20px;'>Buy</button>"
+
+            final = image + content + price + buyB;
+            document.getElementById("item").innerHTML = final;
+        }
+        getCar();
+
+        function buy()
+        {
+            window.location = "index.html";
+            localStorage.clear();
+            localStorage.setItem("hi");
+        }
+    </script>
+</body>
+</html>

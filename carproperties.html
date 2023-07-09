@@ -1,0 +1,132 @@
+<html>
+    <head>
+        <title>Properties of Car</title>
+        <link rel='stylesheet' type='text/css' media='screen' href='car.css'>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <center>
+            <ul class="menu">
+                <li class="list"><a href="index.html">Home</a></li>
+                <li class="list"><a href="car.html">Cars</a></li>
+                <li class="list"><a href="#About">About Me</a></li>
+            </ul>
+        </center>
+        <Br>
+        <Br> 
+        <center>
+        </center>
+        <div id="output"></div>
+        <script>
+            priceV =  localStorage.getItem("Price");
+            Tyrecheck = true;
+            Camcheck = true;
+            tissuecheck = true;
+            sensorCheck = true;
+
+            carName = "<h1  style='font-size: 80px; padding-left: 50px;'>"+ localStorage.getItem("Car") +"</h1>";
+            image = '<br><br><img class="col-lg-4" src="cars/' + localStorage.getItem("Car") + '.png" width="30%" height="30%">';
+            line = '<div style="border-left: 2px solid grey;height: 700px;position: absolute;left: 50%;margin-left: -3px;top: 0;"></div>'
+            Title = '<h1 class="col-lg-3"></h1><h1 style="font-size: 50px;">Car Accessories</h1><br><br>';
+            wheel = '<h1 class="col-lg-3"></h1><h2>Spare Tyre&nbsp&nbsp<input type="checkbox" value="wheel" onclick="Add(this.value)"></h2>';
+            camera = '<h1 class="col-lg-3"></h1><h2>Camera&nbsp&nbsp<input type="checkbox" value="camera" onclick="Add(this.value)"></h2>';
+            tissue = '<h2 class="col-lg-7" >Standard Price - $' + priceV +'</h2><h2>Tissue Holder&nbsp&nbsp<input type="checkbox" value="tissue" onclick="Add(this.value)"></h2>';
+            sensor = '<h1 class="col-lg-7"></h1><h2>Parking Sensor&nbsp&nbsp<input type="checkbox" value="sensor" onclick="Add(this.value)"></h2>';
+
+            price = '<br><br><h1 class="col-lg-7"></h1><h1 id="price" class="' + priceV + '">Final Price - $' + priceV + ' </h1><h1 class="col-lg-8"></h1><button class="btn btn-success" onclick="Checkout()" style="border-radius: 15px; font-size: 20px;">Checkout</button>';
+
+            document.getElementById("output").innerHTML = carName + image + line + Title + wheel + camera + tissue + sensor + price;
+
+            function Add(item)
+            {
+                priceV = Number(priceV);
+                prices = [100, 500, 40, 300];
+                console.log(prices[0] + priceV);
+                if(item == "wheel")
+                {
+                    if(Tyrecheck == true){
+                        sum = priceV + prices[0];
+                        priceV = sum;
+                        document.getElementById("price").innerHTML = "Final Price - $" + sum;
+                        Tyrecheck = false;
+                    }else if(Tyrecheck == false){
+                        sum = priceV - prices[0];
+                        priceV = sum;
+                        document.getElementById("price").innerHTML = "Final Price - $" + sum;
+                        Tyrecheck = true;
+                    }
+                }else if(item == "camera")
+                {
+                    if(Camcheck == true){
+                        sum = priceV + prices[1]
+                        priceV = sum;
+                        document.getElementById("price").innerHTML = "Final Price - $" + sum;
+                        Camcheck = false;
+                    }else if(Camcheck == false){
+                        sum = priceV - prices[1];
+                        priceV = sum;
+                        document.getElementById("price").innerHTML = "Final Price - $" + sum;
+                        Camcheck = true;
+                    }
+                }else if(item == "tissue")
+                {
+                    if(tissuecheck == true){
+                        sum = priceV + prices[2];
+                        priceV = sum;
+                        document.getElementById("price").innerHTML = "Final Price - $" + sum;
+                        tissuecheck = false;
+                    }else if(tissuecheck == false){
+                        sum = priceV - prices[2];
+                        priceV = sum;
+                        document.getElementById("price").innerHTML = "Final Price - $" + sum;
+                        tissuecheck = true;
+                    }
+                }else if(item == "sensor")
+                {
+                    if(sensorCheck == true){
+                        sum = priceV + prices[3]
+                        priceV = sum;
+                        document.getElementById("price").innerHTML = "Final Price - $" + sum;
+                        sensorCheck = false;
+                    }else if(sensorCheck == false){
+                        sum = priceV - prices[3]
+                        priceV = sum;
+                        document.getElementById("price").innerHTML = "Final Price - $" + sum;
+                        sensorCheck = true;
+                    }
+                }  
+            }     
+            
+            function Checkout()
+            {
+                var accessories = [];
+                localStorage.setItem("final", priceV);
+                if(sensorCheck == false)
+                {
+                    accessories.push("sensor");
+                }
+                if(tissuecheck == false)
+                {
+                    accessories.push("tissue");
+                }
+                if(Camcheck == false)
+                {
+                    accessories.push("camera");
+                }
+                if(Tyrecheck == false)
+                {
+                    accessories.push("tyre");
+                }
+                localStorage.setItem("accessories", accessories)
+
+                window.location = "checkout.html"
+            }
+        </script>
+    </body>
+</html>
